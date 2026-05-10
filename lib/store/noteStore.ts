@@ -1,12 +1,3 @@
-// Створіть у папці lib/store файл noteStore.ts і реалізуйте в
-//  ньому Zustand-стор з наступними функціями:
-
-// draft: об’єкт, що містить тимчасові дані форми нотатки 
-// (title, content, tag).
-// setDraft(note): функція для оновлення полів чернетки.
-// clearDraft(): функція для очищення чернетки до початкового стану. 
-// У якості початкового стану використовуйте наступний об’єкт
-
 import { NewNote } from "@/types/note";
 import { create } from "zustand";
 import {persist} from "zustand/middleware";
