@@ -15,7 +15,6 @@ type CheckSessionRequest = {
 };
 
 export interface EditRequest {
-  email: string;
   username: string;
 }
 
@@ -27,10 +26,6 @@ export const fetchNotes = async (note: string, page: number, tag?: string):Promi
             perPage: 12,
             ...(tag ? { tag } : {}),
         },
-        headers: {
-            accept: 'application/json',
-            Authorization: `Bearer ${NOTEHUB_TOKEN}`
-        }
     }
 
      if (tag) {
@@ -104,7 +99,6 @@ export async function updateMe(user: EditRequest): Promise<User> {
   return data;
 }
 
-export const logout = async () => {
-  const { data } = await nextServer.post<User>('/auth/logout');
-  return data;
+export const logout = async (): Promise<void> => {
+  await nextServer.post('/auth/logout')
 };

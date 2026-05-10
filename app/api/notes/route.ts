@@ -4,7 +4,6 @@ import { cookies } from "next/headers";
 import { isAxiosError } from "axios";
 import { logErrorResponse } from "../_utils/utils";
 
-const NOTEHUB_TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN
 
 export async function GET(request: NextRequest) {
   try {
@@ -52,7 +51,6 @@ export async function POST(request: NextRequest) {
     const res = await api.post("/notes", body, {
       headers: {
         Cookie: cookieStore.toString(),
-        Authorization: `Bearer ${NOTEHUB_TOKEN}`,
         "Content-Type": "application/json",
       },
     });

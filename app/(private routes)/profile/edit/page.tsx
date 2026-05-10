@@ -15,7 +15,7 @@ export default function EditProfile() {
   const updatedUser = useAuthStore((state) => state.setUser);
 
     const [username, setUsername] = useState(
-    user?.userName || ''
+    user?.username || ''
   );
 
   const UpdateUserMutation = useMutation({
@@ -33,7 +33,6 @@ export default function EditProfile() {
     e.preventDefault();
 
     UpdateUserMutation.mutate({
-      email: user?.email || '',
       username,
     });
   };
@@ -62,13 +61,13 @@ export default function EditProfile() {
           />
         </div>
 
-        <p>Email: user_email@example.com</p>
+        <p>Email: {user?.email}</p>
 
         <div className={css.actions}>
           <button type="submit" className={css.saveButton}>
           Save
           </button>
-          <button type="button" className={css.cancelButton} onClick={() => router.push('/profile')}>
+          <button type="button" className={css.cancelButton} onClick={() => router.back()}>
             Cancel
           </button>
         </div>

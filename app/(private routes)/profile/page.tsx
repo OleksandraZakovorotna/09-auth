@@ -5,6 +5,7 @@ import { getServerMe } from '@/lib/api/serverApi';
 import { Metadata } from 'next';
 
 
+
 export const metadata: Metadata = {
   title: "Profile Page",
   description: "View and edit your profile information on NoteHub.",
@@ -25,7 +26,8 @@ export const metadata: Metadata = {
 export default async function Profile() { 
 
   const user = await getServerMe();
-
+  console.log(user);
+  
   
 
     return (
@@ -39,7 +41,7 @@ export default async function Profile() {
 	   </div>
      <div className={css.avatarWrapper}>
       <Image
-        src={`${user?.avatar}`}
+        src={`${user?.avatar}` || 'https://ac.goit.global/fullstack/react/default-avatar.jpg' }
         alt="User Avatar"
         width={120}
         height={120}
@@ -48,7 +50,7 @@ export default async function Profile() {
     </div>
     <div className={css.profileInfo}>
       <p>
-        Username: {user.userName}
+        Username: {user.username || 'User'}
       </p>
       <p>
         Email: {user.email}
