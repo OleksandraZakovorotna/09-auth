@@ -3,8 +3,6 @@ import type { NewNote, Note } from "@/types/note";
 import type { NoteList } from "@/types/noteList"
 import { User } from "@/types/user";
 
-const NOTEHUB_TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN
-
 export type AuthRequest = {
     email: string;
     password: string
@@ -28,11 +26,6 @@ export const fetchNotes = async (note: string, page: number, tag?: string):Promi
         },
     }
 
-     if (tag) {
-        options.params.tag = tag;
-    }
-    
-
     const response = await nextServer.get<NoteList>("/notes", options);
     
     return response.data;
@@ -44,7 +37,6 @@ export const createNote = async (newNote: NewNote):Promise<Note> => {
     
     const response = await nextServer.post<Note>("/notes", newNote, {headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${NOTEHUB_TOKEN}`
     }
     });
     
@@ -57,7 +49,6 @@ export const deleteNote = async (noteId: string):Promise<Note> => {
 
         const response = await nextServer.delete<Note>(`/notes/${noteId}`, {headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${NOTEHUB_TOKEN}`
     }
     });
     return response.data;
@@ -67,7 +58,6 @@ export const fetchNoteById = async (id: string):Promise<Note> => {
 
         const response = await nextServer.get<Note>(`/notes/${id}`, {headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${NOTEHUB_TOKEN}`
     }
     });
     return response.data;
